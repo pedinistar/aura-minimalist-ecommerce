@@ -1,13 +1,21 @@
 import { useCartStore } from "../store/useCartStore";
 
 const CartDrawer = () => {
-  const { cart, removeFromCart, updateQuantity, clearCart } = useCartStore();
+  const {
+    cart,
+    isCartOpen,
+    toggleCart,
+    removeFromCart,
+    updateQuantity,
+    clearCart,
+  } = useCartStore();
   const totalCartItems = cart.reduce((a, c) => a + c.quantity, 0);
-
   const totalBill = cart.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0,
   );
+
+  if (!isCartOpen) return null;
 
   if (cart.length === 0) {
     return <div>Cart is empty</div>;

@@ -2,6 +2,9 @@ import { create } from "zustand";
 import { CartState, Product } from "../types/ecommerce";
 
 export const useCartStore = create<CartState>((set) => ({
+  isCartOpen: false,
+  toggleCart: () => set((state) => !state.isCartOpen),
+
   cart: [],
 
   addToCart: (product) =>

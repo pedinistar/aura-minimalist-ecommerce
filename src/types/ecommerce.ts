@@ -16,6 +16,8 @@ export interface CartItem extends Product {
 }
 
 export interface CartState {
+  isCartOpen: boolean;
+  toggleCart: () => boolean;
   cart: CartItem[];
   addToCart: (product: Product) => void;
   removeFromCart: (id: string) => void;
