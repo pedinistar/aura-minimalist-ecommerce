@@ -3,6 +3,7 @@ import { CartState, Product } from "../types/ecommerce";
 
 export const useCartStore = create<CartState>((set) => ({
   cart: [],
+
   addToCart: (product) =>
     set((state) => {
       const existingItem = state.cart.find((item) => item.id === product.id);

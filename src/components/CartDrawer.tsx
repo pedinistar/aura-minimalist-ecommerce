@@ -2,6 +2,7 @@ import { useCartStore } from "../store/useCartStore";
 
 const CartDrawer = () => {
   const { cart, removeFromCart, updateQuantity, clearCart } = useCartStore();
+  const totalCartItems = cart.reduce((a, c) => a + c.quantity, 0);
 
   const totalBill = cart.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -15,7 +16,7 @@ const CartDrawer = () => {
   return (
     <div>
       <h3>Total: {totalBill}</h3>
-      <p>Total Items: {cart.reduce((a, c) => a + c.quantity, 0)}</p>
+      <p>Total Items: {totalCartItems}</p>
       <button onClick={() => clearCart()}>Clear Cart</button>
 
       {cart.map((item) => (
@@ -35,6 +36,7 @@ const CartDrawer = () => {
             <button onClick={() => updateQuantity(item.id, item.quantity - 1)}>
               -
             </button>
+            <button onClick={() => removeFromCart(item.id)}>X</button>
           </div>
         </div>
       ))}
