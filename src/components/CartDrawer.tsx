@@ -1,4 +1,44 @@
+import { useCartStore } from "../store/useCartStore";
+
 const CartDrawer = () => {
-  return <div>CartDrawer</div>;
+  const { cart, removeFromCart, updateQuantity, clearCart } = useCartStore();
+
+  const totalBill = cart.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0,
+  );
+
+  if (cart.length === 0) {
+    return <div>Cart is empty</div>;
+  }
+
+  return (
+    <div>
+      <h3>Total: {totalBill}</h3>
+      <p>Total Items: {cart.reduce((a, c) => a + c.quantity, 0)}</p>
+      <button onClick={() => clearCart()}>Clear Cart</button>
+
+      {cart.map((item) => (
+        <div key={item.id}>
+          <p>{item.name}</p>
+          <p>{item.price * item.quantity}</p>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <button onClick={() => updateQuantity(item.id, item.quantity + 1)}>
+              +
+            </button>
+            <p>{item.quantity}</p>
+            <button onClick={() => updateQuantity(item.id, item.quantity - 1)}>
+              -
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 };
 export default CartDrawer;

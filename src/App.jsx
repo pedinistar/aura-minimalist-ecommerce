@@ -3,7 +3,7 @@ import Catalog from "./pages/Catalog";
 
 const App = () => {
   return (
-    <div>
+    <div style={{ display: "flex" }}>
       <Catalog />
       <CartDrawer />
     </div>
