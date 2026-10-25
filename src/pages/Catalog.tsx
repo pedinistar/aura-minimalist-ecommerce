@@ -3,19 +3,38 @@ import { mockProducts } from "../data/products";
 import { useCartStore } from "../store/useCartStore";
 
 const Catalog = () => {
-  const { cart, addToCart } = useCartStore();
+  const { addToCart } = useCartStore();
+
+  // Filter
   const [selectedCategory, setSelectedCategory] = useState("All");
   const allCategories = [
     "All",
     ...Array.from(new Set(mockProducts.map((item) => item.category))),
   ];
+
+  // Search
+  const [searchQuery, setSearchQuery] = useState("");
+
   const filteredList = mockProducts.filter((item) => {
-    if (selectedCategory === "All") return true;
-    return item.category === selectedCategory;
+    const categoryFilter =
+      selectedCategory === "All" || item.category === selectedCategory;
+    const searchFilter = item.name
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+
+    return categoryFilter && searchFilter;
   });
 
   return (
     <div>
+      <div>
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="Search"
+        />
+      </div>
       <div>
         {allCategories.map((item) => (
           <button onClick={() => setSelectedCategory(item)}>{item}</button>
