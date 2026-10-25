@@ -1,6 +1,12 @@
+import CartDrawer from "./components/CartDrawer";
+import Catalog from "./pages/Catalog";
+
 const App = () => {
   return (
-    <div>App</div>
-  )
-}
-export default App
+    <div>
+      <Catalog />
+      <CartDrawer />
+    </div>
+  );
+};
+export default App;
