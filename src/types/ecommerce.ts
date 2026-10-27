@@ -3,12 +3,12 @@ export interface Product {
   name: string;
   tagline: string;
   price: number;
-  category: string;
+  category: "Furniture" | "Lighting" | "Ceramics" | "Textiles";
   images: string[];
   description: string;
   inStock: boolean;
-  dimensions: string;
-  material: string;
+  dimensions?: string;
+  material?: string;
 }
 
 export interface CartItem extends Product {
@@ -16,11 +16,9 @@ export interface CartItem extends Product {
 }
 
 export interface CartState {
-  isCartOpen: boolean;
-  toggleCart: () => boolean;
   cart: CartItem[];
+  isCartOpen: boolean;
+  toggleCart: () => void;
   addToCart: (product: Product) => void;
-  removeFromCart: (id: string) => void;
   updateQuantity: (id: string, newQuantity: number) => void;
-  clearCart: () => void;
 }

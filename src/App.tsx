@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router";
+import { BrowserRouter, Route, Routes } from "react-router";
 import Catalog from "./pages/Catalog";
 import Home from "./pages/Home";
 import ProductDetail from "./pages/ProductDetail";
@@ -9,9 +9,10 @@ import CartDrawer from "./components/CartDrawer";
 
 const App = () => {
   return (
-    <>
+    <BrowserRouter>
       <Header />
       <CartDrawer />
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/catalog" element={<Catalog />} />
@@ -19,7 +20,7 @@ const App = () => {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/order-success" element={<OrderSuccess />} />
       </Routes>
-    </>
+    </BrowserRouter>
   );
 };
 export default App;
